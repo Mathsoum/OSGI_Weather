@@ -9,13 +9,17 @@ import org.ups.weather.location.service.ILocation;
 import org.ups.weather.location.service.WeatherType;
 
 public abstract class LocalWeather extends Observable implements ILocalWeather {
+
+	private static final long TWO_SECONDS = 2000;
+	private static final long NOW = 0;
 	
 	private WeatherType localWeather;
 	protected ILocation relativeLocation;
+	private Timer weatherTimer;
 	
 	public LocalWeather() {
 		localWeather = WeatherType.UNKNOWN;
-		Timer weatherTimer = new Timer();
+		weatherTimer = new Timer(true);
 		weatherTimer.schedule(new TimerTask() {
 			
 			@Override
@@ -24,12 +28,18 @@ public abstract class LocalWeather extends Observable implements ILocalWeather {
 				setChanged();
 				notifyObservers();
 			}
-		}, 0, 2000); // Start now, then run every 2 secs (2000 millisecs)
+			
+		}, NOW, TWO_SECONDS);
 	}
 	
 	@Override
 	public WeatherType getLocalWeather() {
 		return localWeather;
+	}
+	
+	public void stopTimer() {
+		weatherTimer.cancel();
+		weatherTimer.purge();
 	}
 	
 	private void chooseRandomWeather() {
@@ -38,7 +48,6 @@ public abstract class LocalWeather extends Observable implements ILocalWeather {
 	
 	@Override
 	public ILocation getLocation() {
-		// TODO Auto-generated method stub
 		return relativeLocation;
 	}
 

@@ -11,6 +11,10 @@ public class Activator implements BundleActivator {
 
 	private static BundleContext context;
 
+	private ParisWeather parisWeather;
+	private MoscowWeather moscowWeather;
+	private NewYorkWeather newYorkWeather;
+
 	static BundleContext getContext() {
 		return context;
 	}
@@ -22,9 +26,12 @@ public class Activator implements BundleActivator {
 	public void start(BundleContext bundleContext) throws Exception {
 		Activator.context = bundleContext;
 
-		bundleContext.registerService(ILocalWeather.class.getName(), new ParisWeather(), null);
-		bundleContext.registerService(ILocalWeather.class.getName(), new MoscowWeather(), null);
-		bundleContext.registerService(ILocalWeather.class.getName(), new NewYorkWeather(), null);
+		parisWeather = new ParisWeather();
+		moscowWeather = new MoscowWeather();
+		newYorkWeather = new NewYorkWeather();
+		bundleContext.registerService(ILocalWeather.class.getName(), parisWeather, null);
+		bundleContext.registerService(ILocalWeather.class.getName(), moscowWeather, null);
+		bundleContext.registerService(ILocalWeather.class.getName(), newYorkWeather, null);
 	}
 
 	/*
@@ -32,7 +39,12 @@ public class Activator implements BundleActivator {
 	 * @see org.osgi.framework.BundleActivator#stop(org.osgi.framework.BundleContext)
 	 */
 	public void stop(BundleContext bundleContext) throws Exception {
+		parisWeather.stopTimer();
+		moscowWeather.stopTimer();
+		newYorkWeather.stopTimer();
+		
 		Activator.context = null;
+		
 	}
 
 }
