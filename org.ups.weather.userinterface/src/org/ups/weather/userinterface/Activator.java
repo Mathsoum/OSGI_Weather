@@ -2,6 +2,8 @@ package org.ups.weather.userinterface;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.ups.weather.userinterface.service.IUserInterface;
+import org.ups.weather.userinterface.service.impl.UserInterface;
 
 /**
  * The activator class controls the plug-in life cycle
@@ -20,6 +22,8 @@ public class Activator implements BundleActivator {
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
 		Activator.context = bundleContext;
+		
+		context.registerService(IUserInterface.class.getName(), new UserInterface(), null);
 	}
 
 	/*

@@ -5,17 +5,16 @@ import java.util.Observer;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
-import org.ups.weather.application.service.IWeatherListener;
 import org.ups.weather.application.service.IWeatherService;
 import org.ups.weather.application.service.impl.WeatherListener;
 import org.ups.weather.location.service.ILocalWeather;
 
-public class LocaLWeatherServiceCustomizer implements ServiceTrackerCustomizer<ILocalWeather, ILocalWeather> {
+public class LocalWeatherServiceCustomizer implements ServiceTrackerCustomizer<ILocalWeather, ILocalWeather> {
 	
 	private BundleContext bundleContext;
 	private IWeatherService weatherService;
 	
-	public LocaLWeatherServiceCustomizer(BundleContext _bundleContext, ServiceReference<IWeatherService> _weatherServiceReference) {
+	public LocalWeatherServiceCustomizer(BundleContext _bundleContext, ServiceReference<IWeatherService> _weatherServiceReference) {
 		bundleContext = _bundleContext;
 		weatherService = (IWeatherService) bundleContext.getService(_weatherServiceReference);
 	}
@@ -23,8 +22,10 @@ public class LocaLWeatherServiceCustomizer implements ServiceTrackerCustomizer<I
 	@Override
 	public ILocalWeather addingService(ServiceReference<ILocalWeather> reference) {
 		ILocalWeather localWeather = (ILocalWeather) bundleContext.getService(reference);
-		IWeatherListener weatherListener = new WeatherListener();
-		localWeather.addObserver((Observer) weatherListener); //TODO Unregister this when stopping bundle
+		WeatherListener weatherListener = new WeatherListener();
+		localWeather.addObserver((Observer) weatherListener); //TODO Unregister this when stopping bundle... At least understand why this continue to run after shutting it off...
+		weatherListener.addObserver((Observer) weatherService);
+		
 		weatherService.addWeatherListener(weatherListener, localWeather.getLocation());
 		return localWeather;
 	}
