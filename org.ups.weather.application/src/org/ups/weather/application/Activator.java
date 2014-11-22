@@ -25,11 +25,15 @@ public class Activator implements BundleActivator {
 		Activator.context = bundleContext;
 
 		@SuppressWarnings("unchecked")
-		ServiceRegistration<IWeatherService> serviceRegistration =
-				(ServiceRegistration<IWeatherService>) context.registerService(IWeatherService.class.getName(), new WeatherService(), null);
+		ServiceRegistration<IWeatherService> weatherServiceRegistration =
+			(ServiceRegistration<IWeatherService>) context.registerService(
+				IWeatherService.class.getName(),
+				new WeatherService(),
+				null
+			);
 		
 		ServiceTrackerCustomizer<ILocalWeather, ILocalWeather> serviceTrackerCustomizer =
-				new LocaLWeatherServiceCustomizer(bundleContext, serviceRegistration.getReference());
+				new LocaLWeatherServiceCustomizer(bundleContext, weatherServiceRegistration.getReference());
 		ServiceTracker<ILocalWeather, ILocalWeather> serviceTracker =
 				new ServiceTracker<ILocalWeather, ILocalWeather>(bundleContext, ILocalWeather.class.getName(), serviceTrackerCustomizer);
 		serviceTracker.open();

@@ -24,7 +24,7 @@ public class LocaLWeatherServiceCustomizer implements ServiceTrackerCustomizer<I
 	public ILocalWeather addingService(ServiceReference<ILocalWeather> reference) {
 		ILocalWeather localWeather = (ILocalWeather) bundleContext.getService(reference);
 		IWeatherListener weatherListener = new WeatherListener();
-		localWeather.addObserver((Observer) weatherListener);
+		localWeather.addObserver((Observer) weatherListener); //TODO Unregister this when stopping bundle
 		weatherService.addWeatherListener(weatherListener, localWeather.getLocation());
 		return localWeather;
 	}
@@ -40,6 +40,5 @@ public class LocaLWeatherServiceCustomizer implements ServiceTrackerCustomizer<I
 	public void removedService(ServiceReference<ILocalWeather> reference,
 			ILocalWeather service) {
 		// TODO Auto-generated method stub
-		
 	}
 }
