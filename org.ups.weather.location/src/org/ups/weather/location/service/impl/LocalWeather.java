@@ -5,11 +5,13 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import org.ups.weather.location.service.ILocalWeather;
+import org.ups.weather.location.service.ILocation;
 import org.ups.weather.location.service.WeatherType;
 
-public class LocalWeather extends Observable implements ILocalWeather {
+public abstract class LocalWeather extends Observable implements ILocalWeather {
 	
 	private WeatherType localWeather;
+	protected ILocation relativeLocation;
 	
 	public LocalWeather() {
 		localWeather = WeatherType.UNKNOWN;
@@ -32,6 +34,12 @@ public class LocalWeather extends Observable implements ILocalWeather {
 	
 	private void chooseRandomWeather() {
 		localWeather = WeatherType.values()[(localWeather.ordinal() + 1) % WeatherType.values().length];
+	}
+	
+	@Override
+	public ILocation getLocation() {
+		// TODO Auto-generated method stub
+		return relativeLocation;
 	}
 
 }
