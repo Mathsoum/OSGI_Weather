@@ -2,6 +2,12 @@ package org.ups.weather.application;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceRegistration;
+import org.osgi.util.tracker.ServiceTracker;
+import org.osgi.util.tracker.ServiceTrackerCustomizer;
+import org.ups.weather.application.service.IWeatherService;
+import org.ups.weather.application.service.impl.WeatherService;
+import org.ups.weather.location.service.ILocalWeather;
 
 public class Activator implements BundleActivator {
 
@@ -17,6 +23,16 @@ public class Activator implements BundleActivator {
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
 		Activator.context = bundleContext;
+
+		@SuppressWarnings("unchecked")
+		ServiceRegistration<IWeatherService> serviceRegistration =
+				(ServiceRegistration<IWeatherService>) context.registerService(IWeatherService.class.getName(), new WeatherService(), null);
+		
+		ServiceTrackerCustomizer<ILocalWeather, ILocalWeather> serviceTrackerCustomizer =
+				new LocaLWeatherServiceCustomizer(bundleContext, serviceRegistration.getReference());
+		ServiceTracker<ILocalWeather, ILocalWeather> serviceTracker =
+				new ServiceTracker<ILocalWeather, ILocalWeather>(bundleContext, ILocalWeather.class.getName(), serviceTrackerCustomizer);
+		serviceTracker.open();
 	}
 
 	/*

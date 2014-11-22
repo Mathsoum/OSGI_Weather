@@ -20,7 +20,7 @@ public class WeatherService implements IWeatherService {
 	@Override
 	public void addWeatherListener(IWeatherListener weatherListener,
 			ILocation location) {
-		System.out.println("addWeatherListener");
+		System.out.println("WeatherService : addWeatherListener for " + location.getLatitude() + " : " + location.getLongitude());
 		weatherListeners.put(location, weatherListener);
 	}
 
