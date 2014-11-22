@@ -3,7 +3,7 @@ package org.ups.weather.application.client;
 import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
-import org.ups.weather.application.service.ILocation;
+import org.ups.weather.location.service.ILocation;
 
 public class LocationServiceCustomizer implements ServiceTrackerCustomizer<ILocation, ILocation> {
 	

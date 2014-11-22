@@ -4,7 +4,7 @@ import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
 import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
-import org.ups.weather.application.service.ILocation;
+import org.ups.weather.location.service.ILocation;
 
 public class Activator implements BundleActivator {
 
