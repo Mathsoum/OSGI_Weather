@@ -26,7 +26,7 @@ public abstract class LocalWeather extends Observable implements ILocalWeather {
 			public void run() {
 				chooseRandomWeather();
 				setChanged();
-				notifyObservers();
+				notifyObservers(localWeather);
 			}
 			
 		}, NOW, TWO_SECONDS);
