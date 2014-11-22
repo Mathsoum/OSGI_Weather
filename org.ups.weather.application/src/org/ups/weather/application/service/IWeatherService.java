@@ -1,8 +1,7 @@
-package org.ups.weather.textclient.service;
+package org.ups.weather.application.service;
 
 import java.util.List;
 
-import org.ups.weather.application.service.IWeatherListener;
 import org.ups.weather.location.service.ILocation;
 
 public interface IWeatherService {
