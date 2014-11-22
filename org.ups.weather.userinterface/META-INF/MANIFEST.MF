@@ -4,7 +4,8 @@ Bundle-Name: UserInterface
 Bundle-SymbolicName: org.ups.weather.userinterface
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.ups.weather.userinterface.Activator
-Require-Bundle: org.eclipse.ui,
- org.eclipse.core.runtime
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-1.7
+Import-Package: org.ups.weather.location.service,
+ org.osgi.framework;version="1.3.0"
 Bundle-ActivationPolicy: lazy
+Export-Package: org.ups.weather.userinterface.service
