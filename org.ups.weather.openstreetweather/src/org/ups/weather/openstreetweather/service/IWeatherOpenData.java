@@ -8,6 +8,8 @@ public interface IWeatherOpenData {
 	
 	public ILocation getLocation();
 	
+	public void setLocation(ILocation location);
+	
 	public void addObserver(Observer observer);
 
 	public	String getXmlWeather();

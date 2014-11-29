@@ -6,8 +6,9 @@ Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.ups.weather.application.Activator
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: org.ups.weather.userinterface.service,
- org.ups.weather.location.service,
  org.ups.weather.openstreetweather.service,
+ org.ups.weather.location.service,
+ org.ups.weather.randomweather.service,
  org.osgi.framework;version="1.3.0",
  org.osgi.util.tracker
 Bundle-ActivationPolicy: lazy

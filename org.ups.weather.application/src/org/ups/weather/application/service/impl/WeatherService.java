@@ -10,7 +10,7 @@ import java.util.Observer;
 import org.ups.weather.application.service.IWeatherListener;
 import org.ups.weather.application.service.IWeatherService;
 import org.ups.weather.location.service.ILocation;
-import org.ups.weather.location.service.WeatherType;
+import org.ups.weather.randomweather.service.WeatherType;
 
 public class WeatherService extends Observable implements IWeatherService, Observer {
 	

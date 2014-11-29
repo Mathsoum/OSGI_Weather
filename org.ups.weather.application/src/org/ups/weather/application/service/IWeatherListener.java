@@ -1,6 +1,6 @@
 package org.ups.weather.application.service;
 
-import org.ups.weather.location.service.WeatherType;
+import org.ups.weather.randomweather.service.WeatherType;
 
 
 public interface IWeatherListener {

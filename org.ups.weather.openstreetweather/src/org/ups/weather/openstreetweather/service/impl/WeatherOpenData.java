@@ -132,4 +132,9 @@ public class WeatherOpenData extends Observable implements IWeatherOpenData {
 		return relativeLocation;
 	}
 
+	@Override
+	public void setLocation(ILocation location) {
+		relativeLocation = location;
+	}
+
 }

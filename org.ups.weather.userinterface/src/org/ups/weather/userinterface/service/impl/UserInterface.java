@@ -6,7 +6,6 @@ import java.util.Observable;
 
 import org.ups.weather.userinterface.service.IUserInterface;
 
-//TODO What is this take a String instead of some WeatheType. Could be more generic that way.
 public class UserInterface implements IUserInterface {
 	
 	protected Map<String, String> weatherStatus;

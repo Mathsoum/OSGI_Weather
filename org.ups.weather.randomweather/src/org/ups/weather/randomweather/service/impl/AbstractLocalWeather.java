@@ -1,14 +1,14 @@
-package org.ups.weather.location.service.impl;
+package org.ups.weather.randomweather.service.impl;
 
 import java.util.Observable;
 import java.util.Timer;
 import java.util.TimerTask;
 
-import org.ups.weather.location.service.ILocalWeather;
 import org.ups.weather.location.service.ILocation;
-import org.ups.weather.location.service.WeatherType;
+import org.ups.weather.randomweather.service.ILocalWeather;
+import org.ups.weather.randomweather.service.WeatherType;
 
-public abstract class LocalWeather extends Observable implements ILocalWeather {
+public class AbstractLocalWeather extends Observable implements ILocalWeather {
 
 	private static final long EVERY_TWO_SECONDS = 2000;
 	private static final long START_NOW = 0;
@@ -17,7 +17,7 @@ public abstract class LocalWeather extends Observable implements ILocalWeather {
 	protected ILocation relativeLocation;
 	private Timer weatherTimer;
 	
-	public LocalWeather() {
+	public AbstractLocalWeather() {
 		localWeather = WeatherType.UNKNOWN;
 		weatherTimer = new Timer(true);
 		weatherTimer.schedule(new TimerTask() {
@@ -49,6 +49,11 @@ public abstract class LocalWeather extends Observable implements ILocalWeather {
 	@Override
 	public ILocation getLocation() {
 		return relativeLocation;
+	}
+	
+	@Override
+	public void setLocation(ILocation location) {
+		relativeLocation = location;
 	}
 
 }

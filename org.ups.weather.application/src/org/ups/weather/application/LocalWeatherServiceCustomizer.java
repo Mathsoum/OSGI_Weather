@@ -7,7 +7,7 @@ import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 import org.ups.weather.application.service.IWeatherService;
 import org.ups.weather.application.service.impl.WeatherListener;
-import org.ups.weather.location.service.ILocalWeather;
+import org.ups.weather.randomweather.service.ILocalWeather;
 
 public class LocalWeatherServiceCustomizer implements ServiceTrackerCustomizer<ILocalWeather, ILocalWeather> {
 	

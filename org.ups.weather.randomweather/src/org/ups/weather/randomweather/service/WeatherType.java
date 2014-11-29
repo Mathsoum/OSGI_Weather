@@ -1,4 +1,4 @@
-package org.ups.weather.location.service;
+package org.ups.weather.randomweather.service;
 
 public enum WeatherType {
 	SHINY, CLOUDY, RAINY, SHOWERS, SNOW, UNKNOWN

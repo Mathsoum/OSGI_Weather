@@ -5,8 +5,7 @@ Bundle-SymbolicName: org.ups.weather.openstreetweather
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.ups.weather.openstreetweather.Activator
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
-Import-Package: org.osgi.framework;version="1.3.0",
- javax.xml,
- org.ups.weather.location.service
+Import-Package: org.ups.weather.location.service,
+ org.osgi.framework;version="1.3.0"
 Bundle-ActivationPolicy: lazy
 Export-Package: org.ups.weather.openstreetweather.service
