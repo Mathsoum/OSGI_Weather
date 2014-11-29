@@ -56,4 +56,9 @@ public class RandomWeather extends Observable implements IRandomWeather {
 		relativeLocation = location;
 	}
 
+	@Override
+	public void stop() {
+		weatherTimer.cancel();
+	}
+
 }

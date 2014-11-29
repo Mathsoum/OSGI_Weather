@@ -22,24 +22,14 @@ import org.w3c.dom.NodeList;
 public class OpenWeatherData extends Observable implements IOpenWeatherData {
 	
 	private String currentWeather;
-	private ILocation relativeLocation = new ILocation() {
-		
-		@Override
-		public Float getLongitude() {
-			return 2.3508f;
-		}
-		
-		@Override
-		public Float getLatitude() {
-			return 48.8567f;
-		}
-	};
+	private ILocation relativeLocation;
+	private Timer weatherTimer;
 	
 	public static String WEATHER_API_URL = new String("http://api.openweathermap.org/data/2.5/weather");
 	
 	public OpenWeatherData() {
-		Timer timer = new Timer();
-		timer.schedule(new TimerTask() {
+		weatherTimer = new Timer();
+		weatherTimer.schedule(new TimerTask() {
 			
 			@Override
 			public void run() {
@@ -138,6 +128,11 @@ public class OpenWeatherData extends Observable implements IOpenWeatherData {
 	@Override
 	public String getWeather() {
 		return currentWeather;
+	}
+
+	@Override
+	public void stop() {
+		weatherTimer.cancel();
 	}
 
 }

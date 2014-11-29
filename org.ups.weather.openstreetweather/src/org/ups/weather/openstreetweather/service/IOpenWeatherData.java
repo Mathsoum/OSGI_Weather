@@ -13,6 +13,7 @@ public interface IOpenWeatherData {
 	public String getWeather();
 	
 	public void addObserver(Observer observer);
-
+	
+	public void stop();
 	
 }

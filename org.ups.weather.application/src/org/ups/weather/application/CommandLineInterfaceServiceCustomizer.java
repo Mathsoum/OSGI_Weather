@@ -20,7 +20,7 @@ public class CommandLineInterfaceServiceCustomizer implements ServiceTrackerCust
 	@Override
 	public ICommandLineInterface addingService(ServiceReference<ICommandLineInterface> reference) {
 		ICommandLineInterface userInterface = (ICommandLineInterface) bundleContext.getService(reference);
-		weatherService.addObserver(userInterface);
+		weatherService.addObserver(userInterface);  //TODO Must be unregistered when stopping bundle... And i don't know how to do it...
 		
 		return userInterface;
 	}

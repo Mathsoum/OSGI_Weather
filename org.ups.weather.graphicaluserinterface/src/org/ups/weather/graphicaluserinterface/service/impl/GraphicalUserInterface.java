@@ -30,6 +30,8 @@ public class GraphicalUserInterface implements IGraphicalUserInterface, Observer
 		
 		ui_weatherStatus = new HashMap<>();
 		
+		printBundleStatus();
+		
 		// run the event loop as long as the window is open
 		while (!shell.isDisposed()) {
 		    // read the next OS event queue and transfer it to a SWT event 
@@ -52,10 +54,9 @@ public class GraphicalUserInterface implements IGraphicalUserInterface, Observer
 			Map<String, String> weatherStatus = (Map<String, String>) paramFromObservable;
 			setWeatherStatus(weatherStatus);
 		}
-		
-		updateView();
 	}
 
+	@SuppressWarnings("unused")
 	private void updateView() {
 		for(String location : weatherStatus.keySet()) {
 			boolean exists = false;
@@ -108,8 +109,9 @@ public class GraphicalUserInterface implements IGraphicalUserInterface, Observer
 		shell.update();
 	}
 
-	protected void print() {
-		System.err.println("Uninmplemented bundle !");
+	protected void printBundleStatus() {
+		System.err.println("GUI bundle broken !");
+		System.err.println("This bundle has not been completed.");
 		System.err.println("The main reason why this bundle has been kept"
 				+ "in the app is just to show that I've tried SWT. "
 				+ "And well... I failed... But the bundle's still there !");
@@ -118,6 +120,6 @@ public class GraphicalUserInterface implements IGraphicalUserInterface, Observer
 	@Override
 	public void setWeatherStatus(Map<String, String> _weatherStatus) {
 		weatherStatus = _weatherStatus;
-		print();
+//		updateView();
 	}
 }

@@ -23,7 +23,7 @@ public class RandomWeatherServiceCustomizer implements ServiceTrackerCustomizer<
 	public IRandomWeather addingService(ServiceReference<IRandomWeather> reference) {
 		IRandomWeather localWeather = (IRandomWeather) bundleContext.getService(reference);
 		WeatherListener weatherListener = new WeatherListener();
-		localWeather.addObserver((Observer) weatherListener); //TODO Unregister this when stopping bundle... At least understand why this continue to run after shutting it off...
+		localWeather.addObserver((Observer) weatherListener); //TODO Must be unregistered when stopping bundle... And i don't know how to do it...
 		weatherListener.addObserver((Observer) weatherService);
 		
 		weatherService.addWeatherListener(weatherListener, localWeather.getLocation());
@@ -40,6 +40,6 @@ public class RandomWeatherServiceCustomizer implements ServiceTrackerCustomizer<
 	@Override
 	public void removedService(ServiceReference<IRandomWeather> reference,
 			IRandomWeather service) {
-		// TODO Auto-generated method stub
+		service.stop();
 	}
 }

@@ -20,7 +20,7 @@ public class GraphicalUserInterfaceServiceCustomizer implements ServiceTrackerCu
 	@Override
 	public IGraphicalUserInterface addingService(ServiceReference<IGraphicalUserInterface> reference) {
 		IGraphicalUserInterface userInterface = (IGraphicalUserInterface) bundleContext.getService(reference);
-		weatherService.addObserver(userInterface);
+		weatherService.addObserver(userInterface);  //TODO Must be unregistered when stopping bundle... And i don't know how to do it...
 		
 		return userInterface;
 	}

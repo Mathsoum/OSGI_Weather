@@ -24,7 +24,8 @@ public class RealWeatherServiceCustomizer implements ServiceTrackerCustomizer<IO
 	public IOpenWeatherData addingService(ServiceReference<IOpenWeatherData> reference) {
 		IOpenWeatherData weatherOpenData = (IOpenWeatherData) bundleContext.getService(reference);
 		IOpenWeatherDataListener realWeatherListener = new OpenWeatherDataListener();
-		weatherOpenData.addObserver((Observer) realWeatherListener); //TODO Unregister this when stopping bundle... At least understand why this continue to run after shutting it off...
+		
+		weatherOpenData.addObserver((Observer) realWeatherListener); //TODO Must be unregistered when stopping bundle... And i don't know how to do it...
 		realWeatherListener.addObserver((Observer) weatherService);
 		
 		weatherService.addWeatherListener(realWeatherListener, weatherOpenData.getLocation());
@@ -41,6 +42,6 @@ public class RealWeatherServiceCustomizer implements ServiceTrackerCustomizer<IO
 	@Override
 	public void removedService(ServiceReference<IOpenWeatherData> reference,
 			IOpenWeatherData service) {
-		// TODO Auto-generated method stub
+		service.stop();
 	}
 }

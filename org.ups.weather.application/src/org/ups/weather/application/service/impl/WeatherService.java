@@ -25,7 +25,6 @@ public class WeatherService extends Observable implements IWeatherService, Obser
 	@Override
 	public void addWeatherListener(IWeatherListener weatherListener,
 			ILocation location) {
-		System.out.println("WeatherService : addWeatherListener for " + location.toString());
 		if (weatherListeners.get(location) == null) {
 			weatherListeners.put(location, new HashSet<IWeatherListener>());
 		}
@@ -41,7 +40,6 @@ public class WeatherService extends Observable implements IWeatherService, Obser
 		return locations;
 	}
 
-	//TODO OMG ! Nested block... Refactor ?
 	@Override
 	public void update(Observable observable, Object paramFromObserver) {
 		if(observable instanceof IWeatherListener) {
