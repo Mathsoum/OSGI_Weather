@@ -1,16 +1,16 @@
-package org.ups.weather.userinterface.service.impl;
+package org.ups.weather.commandlineinterface.service.impl;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
 
-import org.ups.weather.userinterface.service.IUserInterface;
+import org.ups.weather.commandlineinterface.service.ICommandLineInterface;
 
-public abstract class UserInterface implements IUserInterface {
+public class CommandLineInterface implements ICommandLineInterface {
 	
 	protected Map<String, String> weatherStatus;
 	
-	public UserInterface() {
+	public CommandLineInterface() {
 		weatherStatus = new HashMap<>();
 
 		System.out.println("The weather channel !");
@@ -23,7 +23,12 @@ public abstract class UserInterface implements IUserInterface {
 		print();
 	}
 	
-	protected abstract void print();
+	protected void print() {
+		for(String location : weatherStatus.keySet()) {
+			System.out.print(location);
+			System.out.println(" : the weather is " + weatherStatus.get(location));
+		}
+	}
 
 	@Override
 	public void update(Observable observable, Object paramFromObservable) {

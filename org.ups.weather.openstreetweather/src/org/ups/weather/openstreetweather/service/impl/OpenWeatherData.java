@@ -15,12 +15,11 @@ import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 import org.ups.weather.location.service.ILocation;
-import org.ups.weather.openstreetweather.service.IWeatherOpenData;
+import org.ups.weather.openstreetweather.service.IOpenWeatherData;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
-//TODO Don't forget to rename classes relative to open weather data to keep consistency !
-public class WeatherOpenData extends Observable implements IWeatherOpenData {
+public class OpenWeatherData extends Observable implements IOpenWeatherData {
 	
 	private String currentWeather;
 	private ILocation relativeLocation = new ILocation() {
@@ -38,7 +37,7 @@ public class WeatherOpenData extends Observable implements IWeatherOpenData {
 	
 	public static String WEATHER_API_URL = new String("http://api.openweathermap.org/data/2.5/weather");
 	
-	public WeatherOpenData() {
+	public OpenWeatherData() {
 		Timer timer = new Timer();
 		timer.schedule(new TimerTask() {
 			

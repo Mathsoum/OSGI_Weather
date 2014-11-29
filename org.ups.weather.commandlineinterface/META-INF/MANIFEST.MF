@@ -1,11 +1,10 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: UserInterface
-Bundle-SymbolicName: org.ups.weather.userinterface
+Bundle-SymbolicName: org.ups.weather.commandlineinterface
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: org.ups.weather.userinterface.Activator
+Bundle-Activator: org.ups.weather.commandlineinterface.Activator
 Bundle-RequiredExecutionEnvironment: JavaSE-1.7
 Import-Package: org.osgi.framework;version="1.3.0"
 Bundle-ActivationPolicy: lazy
-Export-Package: org.ups.weather.userinterface.service
-Require-Bundle: org.eclipse.swt
+Export-Package: org.ups.weather.commandlineinterface.service

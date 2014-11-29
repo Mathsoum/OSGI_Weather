@@ -4,7 +4,7 @@ import java.util.Observer;
 
 import org.ups.weather.location.service.ILocation;
 
-public interface IWeatherOpenData {
+public interface IOpenWeatherData {
 	
 	public ILocation getLocation();
 	

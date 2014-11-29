@@ -1,8 +1,9 @@
-package org.ups.weather.userinterface.service.impl;
+package org.ups.weather.graphicaluserinterface.service.impl;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
+import java.util.Observer;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FormAttachment;
@@ -10,14 +11,15 @@ import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
-import org.ups.weather.userinterface.service.IGraphicalUserInterface;
+import org.ups.weather.graphicaluserinterface.service.IGraphicalUserInterface;
 
-public class GraphicalUserInterface extends UserInterface implements IGraphicalUserInterface {
+public class GraphicalUserInterface implements IGraphicalUserInterface, Observer {
 
 	private Display display;
 	private Shell shell;
 	
 	private Map<Label, Label> ui_weatherStatus;
+	private Map<String, String> weatherStatus;
 	
 	public GraphicalUserInterface() {
 		display = new Display();
@@ -45,7 +47,12 @@ public class GraphicalUserInterface extends UserInterface implements IGraphicalU
 
 	@Override
 	public void update(Observable observable, Object paramFromObservable) {
-		super.update(observable, paramFromObservable);
+		if(paramFromObservable instanceof Map<?, ?>) {
+			@SuppressWarnings("unchecked")
+			Map<String, String> weatherStatus = (Map<String, String>) paramFromObservable;
+			setWeatherStatus(weatherStatus);
+		}
+		
 		updateView();
 	}
 
@@ -101,11 +108,16 @@ public class GraphicalUserInterface extends UserInterface implements IGraphicalU
 		shell.update();
 	}
 
-	@Override
 	protected void print() {
 		System.err.println("Uninmplemented bundle !");
 		System.err.println("The main reason why this bundle has been kept"
 				+ "in the app is just to show that I've tried SWT. "
 				+ "And well... I failed... But the bundle's still there !");
+	}
+	
+	@Override
+	public void setWeatherStatus(Map<String, String> _weatherStatus) {
+		weatherStatus = _weatherStatus;
+		print();
 	}
 }

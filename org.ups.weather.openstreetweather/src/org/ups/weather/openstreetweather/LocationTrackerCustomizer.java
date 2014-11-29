@@ -4,8 +4,8 @@ import org.osgi.framework.BundleContext;
 import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 import org.ups.weather.location.service.ILocation;
-import org.ups.weather.openstreetweather.service.IWeatherOpenData;
-import org.ups.weather.openstreetweather.service.impl.WeatherOpenData;
+import org.ups.weather.openstreetweather.service.IOpenWeatherData;
+import org.ups.weather.openstreetweather.service.impl.OpenWeatherData;
 
 public class LocationTrackerCustomizer implements
 		ServiceTrackerCustomizer<ILocation, ILocation> {
@@ -20,9 +20,9 @@ public class LocationTrackerCustomizer implements
 	public ILocation addingService(ServiceReference<ILocation> reference) {
 		ILocation location = (ILocation) bundleContext.getService(reference);
 		
-		WeatherOpenData weatherOpenData = new WeatherOpenData();
+		OpenWeatherData weatherOpenData = new OpenWeatherData();
 		weatherOpenData.setLocation(location);
-		bundleContext.registerService(IWeatherOpenData.class.getName(), weatherOpenData, null);
+		bundleContext.registerService(IOpenWeatherData.class.getName(), weatherOpenData, null);
 		
 		return location;
 	}

@@ -1,14 +1,10 @@
-package org.ups.weather.userinterface;
+package org.ups.weather.graphicaluserinterface;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.ups.weather.userinterface.service.IUserInterface;
-import org.ups.weather.userinterface.service.impl.CommandLineInterface;
+import org.ups.weather.graphicaluserinterface.service.IGraphicalUserInterface;
+import org.ups.weather.graphicaluserinterface.service.impl.GraphicalUserInterface;
 
-/**
- * The activator class controls the plug-in life cycle
- */
-//TODO Extract GUI bundle, even if it doen't work.
 public class Activator implements BundleActivator {
 
 	private static BundleContext context;
@@ -24,8 +20,8 @@ public class Activator implements BundleActivator {
 	public void start(BundleContext bundleContext) throws Exception {
 		Activator.context = bundleContext;
 
-		context.registerService(IUserInterface.class.getName(), new CommandLineInterface(), null);
-//		context.registerService(IUserInterface.class.getName(), new GraphicalUserInterface(), null);
+		context.registerService(IGraphicalUserInterface.class.getName(), new GraphicalUserInterface(), null);
+		
 	}
 
 	/*
@@ -35,4 +31,5 @@ public class Activator implements BundleActivator {
 	public void stop(BundleContext bundleContext) throws Exception {
 		Activator.context = null;
 	}
+
 }

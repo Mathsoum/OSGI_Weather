@@ -7,9 +7,10 @@ import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 import org.ups.weather.application.service.IWeatherService;
 import org.ups.weather.application.service.impl.WeatherService;
-import org.ups.weather.openstreetweather.service.IWeatherOpenData;
+import org.ups.weather.commandlineinterface.service.ICommandLineInterface;
+import org.ups.weather.graphicaluserinterface.service.IGraphicalUserInterface;
+import org.ups.weather.openstreetweather.service.IOpenWeatherData;
 import org.ups.weather.randomweather.service.IRandomWeather;
-import org.ups.weather.userinterface.service.IUserInterface;
 
 public class Activator implements BundleActivator {
 
@@ -40,17 +41,24 @@ public class Activator implements BundleActivator {
 				new ServiceTracker<IRandomWeather, IRandomWeather>(bundleContext, IRandomWeather.class.getName(), randomWeatherServiceTrackerCustomizer);
 		randomWeatherServiceTracker.open();
 		
-		ServiceTrackerCustomizer<IWeatherOpenData, IWeatherOpenData> openDataServiceTrackerCustomizer =
+		ServiceTrackerCustomizer<IOpenWeatherData, IOpenWeatherData> openWeatherDataServiceTrackerCustomizer =
 				new RealWeatherServiceCustomizer(bundleContext, weatherServiceRegistration.getReference());
-		ServiceTracker<IWeatherOpenData, IWeatherOpenData> openDataServiceTracker =
-				new ServiceTracker<IWeatherOpenData, IWeatherOpenData>(bundleContext, IWeatherOpenData.class.getName(), openDataServiceTrackerCustomizer);
-		openDataServiceTracker.open();
+		ServiceTracker<IOpenWeatherData, IOpenWeatherData> openWeatherDataServiceTracker =
+				new ServiceTracker<IOpenWeatherData, IOpenWeatherData>(bundleContext, IOpenWeatherData.class.getName(), openWeatherDataServiceTrackerCustomizer);
+		openWeatherDataServiceTracker.open();
 		
-		ServiceTrackerCustomizer<IUserInterface, IUserInterface> userInterfaceServiceTrackerCustomizer =
-				new UserInterfaceServiceCustomizer(bundleContext, weatherServiceRegistration.getReference());
-		ServiceTracker<IUserInterface, IUserInterface> userInterfaceServiceTracker =
-				new ServiceTracker<IUserInterface, IUserInterface>(bundleContext, IUserInterface.class.getName(), userInterfaceServiceTrackerCustomizer);
-		userInterfaceServiceTracker.open();
+		ServiceTrackerCustomizer<ICommandLineInterface, ICommandLineInterface> commandLineInterfaceServiceTrackerCustomizer =
+				new CommandLineInterfaceServiceCustomizer(bundleContext, weatherServiceRegistration.getReference());
+		ServiceTracker<ICommandLineInterface, ICommandLineInterface> commandLineInterfaceServiceTracker =
+				new ServiceTracker<ICommandLineInterface, ICommandLineInterface>(bundleContext, ICommandLineInterface.class.getName(), commandLineInterfaceServiceTrackerCustomizer);
+		commandLineInterfaceServiceTracker.open();
+
+		
+		ServiceTrackerCustomizer<IGraphicalUserInterface, IGraphicalUserInterface> graphicalUserInterfaceServiceTrackerCustomizer =
+				new GraphicalUserInterfaceServiceCustomizer(bundleContext, weatherServiceRegistration.getReference());
+		ServiceTracker<IGraphicalUserInterface, IGraphicalUserInterface> grapĥicalUserInterfaceServiceTracker =
+				new ServiceTracker<IGraphicalUserInterface, IGraphicalUserInterface>(bundleContext, IGraphicalUserInterface.class.getName(), graphicalUserInterfaceServiceTrackerCustomizer);
+		grapĥicalUserInterfaceServiceTracker.open();
 	}
 
 	/*

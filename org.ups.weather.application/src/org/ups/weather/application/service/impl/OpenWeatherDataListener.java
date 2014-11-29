@@ -3,10 +3,10 @@ package org.ups.weather.application.service.impl;
 import java.util.Observable;
 import java.util.Observer;
 
-import org.ups.weather.application.service.IRealWeatherListener;
+import org.ups.weather.application.service.IOpenWeatherDataListener;
 import org.ups.weather.randomweather.service.WeatherType;
 
-public class RealWeatherListener extends Observable implements IRealWeatherListener, Observer {
+public class OpenWeatherDataListener extends Observable implements IOpenWeatherDataListener, Observer {
 	
 	private String currentWeatherData;
 
