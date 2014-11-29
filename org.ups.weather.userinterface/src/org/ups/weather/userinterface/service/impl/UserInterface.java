@@ -8,9 +8,10 @@ import org.ups.weather.location.service.ILocation;
 import org.ups.weather.location.service.WeatherType;
 import org.ups.weather.userinterface.service.IUserInterface;
 
+//TODO What is this take a String instead of some WeatheType. Could be more generic that way.
 public class UserInterface implements IUserInterface {
 	
-	Map<ILocation, WeatherType> weatherStatus;
+	protected Map<ILocation, WeatherType> weatherStatus;
 	
 	public UserInterface() {
 		weatherStatus = new HashMap<>();
@@ -25,7 +26,7 @@ public class UserInterface implements IUserInterface {
 		print();
 	}
 	
-	private void print() {
+	protected void print() {
 		for(ILocation location : weatherStatus.keySet()) {
 			System.out.print("(" + location.getLatitude() + " - " + location.getLongitude() + ")");
 			System.out.println(" : the weather is " + weatherStatus.get(location));

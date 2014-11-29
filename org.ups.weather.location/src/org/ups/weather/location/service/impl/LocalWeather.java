@@ -10,8 +10,8 @@ import org.ups.weather.location.service.WeatherType;
 
 public abstract class LocalWeather extends Observable implements ILocalWeather {
 
-	private static final long TWO_SECONDS = 2000;
-	private static final long NOW = 0;
+	private static final long EVERY_TWO_SECONDS = 2000;
+	private static final long START_NOW = 0;
 	
 	private WeatherType localWeather;
 	protected ILocation relativeLocation;
@@ -29,7 +29,7 @@ public abstract class LocalWeather extends Observable implements ILocalWeather {
 				notifyObservers(localWeather);
 			}
 			
-		}, NOW, TWO_SECONDS);
+		}, START_NOW, EVERY_TWO_SECONDS);
 	}
 	
 	@Override

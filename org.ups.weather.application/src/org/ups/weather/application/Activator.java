@@ -7,7 +7,7 @@ import org.osgi.util.tracker.ServiceTracker;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 import org.ups.weather.application.service.IWeatherService;
 import org.ups.weather.application.service.impl.WeatherService;
-import org.ups.weather.location.service.ILocalWeather;
+import org.ups.weather.openstreetweather.service.IWeatherOpenData;
 import org.ups.weather.userinterface.service.IUserInterface;
 
 public class Activator implements BundleActivator {
@@ -33,11 +33,17 @@ public class Activator implements BundleActivator {
 				null
 			);
 		
-		ServiceTrackerCustomizer<ILocalWeather, ILocalWeather> weatherServiceTrackerCustomizer =
-				new LocalWeatherServiceCustomizer(bundleContext, weatherServiceRegistration.getReference());
-		ServiceTracker<ILocalWeather, ILocalWeather> weatherServiceTracker =
-				new ServiceTracker<ILocalWeather, ILocalWeather>(bundleContext, ILocalWeather.class.getName(), weatherServiceTrackerCustomizer);
-		weatherServiceTracker.open();
+//		ServiceTrackerCustomizer<ILocalWeather, ILocalWeather> weatherServiceTrackerCustomizer =
+//				new LocalWeatherServiceCustomizer(bundleContext, weatherServiceRegistration.getReference());
+//		ServiceTracker<ILocalWeather, ILocalWeather> weatherServiceTracker =
+//				new ServiceTracker<ILocalWeather, ILocalWeather>(bundleContext, ILocalWeather.class.getName(), weatherServiceTrackerCustomizer);
+//		weatherServiceTracker.open();
+		
+		ServiceTrackerCustomizer<IWeatherOpenData, IWeatherOpenData> openDataServiceTrackerCustomizer =
+				new OpenDataServiceCustomizer(bundleContext, weatherServiceRegistration.getReference());
+		ServiceTracker<IWeatherOpenData, IWeatherOpenData> openDataServiceTracker =
+				new ServiceTracker<IWeatherOpenData, IWeatherOpenData>(bundleContext, IWeatherOpenData.class.getName(), openDataServiceTrackerCustomizer);
+		openDataServiceTracker.open();
 		
 		ServiceTrackerCustomizer<IUserInterface, IUserInterface> userInterfaceServiceTrackerCustomizer =
 				new UserInterfaceServiceCustomizer(bundleContext, weatherServiceRegistration.getReference());

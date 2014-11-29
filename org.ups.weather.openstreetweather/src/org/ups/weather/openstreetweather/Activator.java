@@ -1,13 +1,10 @@
-package org.ups.weather.userinterface;
+package org.ups.weather.openstreetweather;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
-import org.ups.weather.userinterface.service.IUserInterface;
-import org.ups.weather.userinterface.service.impl.UserInterface;
+import org.ups.weather.openstreetweather.service.IWeatherOpenData;
+import org.ups.weather.openstreetweather.service.impl.WeatherOpenData;
 
-/**
- * The activator class controls the plug-in life cycle
- */
 public class Activator implements BundleActivator {
 
 	private static BundleContext context;
@@ -22,9 +19,8 @@ public class Activator implements BundleActivator {
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
 		Activator.context = bundleContext;
-
-		context.registerService(IUserInterface.class.getName(), new UserInterface(), null);
-//		context.registerService(IUserInterface.class.getName(), new GraphicalUserInterface(), null);
+		
+		context.registerService(IWeatherOpenData.class.getName(), new WeatherOpenData(), null);
 	}
 
 	/*
@@ -34,4 +30,5 @@ public class Activator implements BundleActivator {
 	public void stop(BundleContext bundleContext) throws Exception {
 		Activator.context = null;
 	}
+
 }

@@ -2,7 +2,7 @@ package org.ups.weather.location.service.impl;
 
 import org.ups.weather.location.service.ILocation;
 
-public class Moscow implements ILocation {
+public class Moscow extends AbstractLocation implements ILocation {
 
 	@Override
 	public Float getLatitude() {
@@ -11,7 +11,6 @@ public class Moscow implements ILocation {
 
 	@Override
 	public Float getLongitude() {
-		// TODO Auto-generated method stub
 		return 37.6167f;
 	}
 

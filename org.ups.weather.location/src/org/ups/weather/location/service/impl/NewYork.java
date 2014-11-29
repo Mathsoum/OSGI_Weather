@@ -2,7 +2,7 @@ package org.ups.weather.location.service.impl;
 
 import org.ups.weather.location.service.ILocation;
 
-public class NewYork implements ILocation {
+public class NewYork extends AbstractLocation implements ILocation {
 
 	@Override
 	public Float getLatitude() {
