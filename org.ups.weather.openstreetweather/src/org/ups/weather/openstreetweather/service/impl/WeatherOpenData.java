@@ -74,7 +74,6 @@ public class WeatherOpenData extends Observable implements IWeatherOpenData {
 		return weatherData;
 	}
 
-	@Override
 	public String getXmlWeather() {
 		return execute(WEATHER_API_URL);
 	}
@@ -135,6 +134,11 @@ public class WeatherOpenData extends Observable implements IWeatherOpenData {
 	@Override
 	public void setLocation(ILocation location) {
 		relativeLocation = location;
+	}
+
+	@Override
+	public String getWeather() {
+		return currentWeather;
 	}
 
 }

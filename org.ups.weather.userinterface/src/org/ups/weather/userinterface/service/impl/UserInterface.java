@@ -6,7 +6,7 @@ import java.util.Observable;
 
 import org.ups.weather.userinterface.service.IUserInterface;
 
-public class UserInterface implements IUserInterface {
+public abstract class UserInterface implements IUserInterface {
 	
 	protected Map<String, String> weatherStatus;
 	
@@ -23,12 +23,7 @@ public class UserInterface implements IUserInterface {
 		print();
 	}
 	
-	protected void print() {
-		for(String location : weatherStatus.keySet()) {
-			System.out.print(location);
-			System.out.println(" : the weather is " + weatherStatus.get(location));
-		}
-	}
+	protected abstract void print();
 
 	@Override
 	public void update(Observable observable, Object paramFromObservable) {

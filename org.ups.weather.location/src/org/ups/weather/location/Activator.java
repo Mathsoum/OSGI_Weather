@@ -2,6 +2,10 @@ package org.ups.weather.location;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.ups.weather.location.service.ILocation;
+import org.ups.weather.location.service.impl.Moscow;
+import org.ups.weather.location.service.impl.NewYork;
+import org.ups.weather.location.service.impl.Paris;
 
 public class Activator implements BundleActivator {
 
@@ -17,6 +21,10 @@ public class Activator implements BundleActivator {
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
 		Activator.context = bundleContext;
+
+		context.registerService(ILocation.class.getName(), new Paris(), null);
+		context.registerService(ILocation.class.getName(), new Moscow(), null);
+		context.registerService(ILocation.class.getName(), new NewYork(), null);
 	}
 
 	/*

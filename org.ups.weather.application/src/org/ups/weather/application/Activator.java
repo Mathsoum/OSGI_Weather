@@ -8,6 +8,7 @@ import org.osgi.util.tracker.ServiceTrackerCustomizer;
 import org.ups.weather.application.service.IWeatherService;
 import org.ups.weather.application.service.impl.WeatherService;
 import org.ups.weather.openstreetweather.service.IWeatherOpenData;
+import org.ups.weather.randomweather.service.IRandomWeather;
 import org.ups.weather.userinterface.service.IUserInterface;
 
 public class Activator implements BundleActivator {
@@ -33,14 +34,14 @@ public class Activator implements BundleActivator {
 				null
 			);
 		
-//		ServiceTrackerCustomizer<ILocalWeather, ILocalWeather> weatherServiceTrackerCustomizer =
-//				new LocalWeatherServiceCustomizer(bundleContext, weatherServiceRegistration.getReference());
-//		ServiceTracker<ILocalWeather, ILocalWeather> weatherServiceTracker =
-//				new ServiceTracker<ILocalWeather, ILocalWeather>(bundleContext, ILocalWeather.class.getName(), weatherServiceTrackerCustomizer);
-//		weatherServiceTracker.open();
+		ServiceTrackerCustomizer<IRandomWeather, IRandomWeather> randomWeatherServiceTrackerCustomizer =
+				new RandomWeatherServiceCustomizer(bundleContext, weatherServiceRegistration.getReference());
+		ServiceTracker<IRandomWeather, IRandomWeather> randomWeatherServiceTracker =
+				new ServiceTracker<IRandomWeather, IRandomWeather>(bundleContext, IRandomWeather.class.getName(), randomWeatherServiceTrackerCustomizer);
+		randomWeatherServiceTracker.open();
 		
 		ServiceTrackerCustomizer<IWeatherOpenData, IWeatherOpenData> openDataServiceTrackerCustomizer =
-				new OpenDataServiceCustomizer(bundleContext, weatherServiceRegistration.getReference());
+				new RealWeatherServiceCustomizer(bundleContext, weatherServiceRegistration.getReference());
 		ServiceTracker<IWeatherOpenData, IWeatherOpenData> openDataServiceTracker =
 				new ServiceTracker<IWeatherOpenData, IWeatherOpenData>(bundleContext, IWeatherOpenData.class.getName(), openDataServiceTrackerCustomizer);
 		openDataServiceTracker.open();

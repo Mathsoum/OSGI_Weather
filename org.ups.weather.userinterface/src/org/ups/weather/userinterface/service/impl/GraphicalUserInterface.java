@@ -100,4 +100,12 @@ public class GraphicalUserInterface extends UserInterface implements IGraphicalU
 		display.update();
 		shell.update();
 	}
+
+	@Override
+	protected void print() {
+		System.err.println("Uninmplemented bundle !");
+		System.err.println("The main reason why this bundle has been kept"
+				+ "in the app is just to show that I've tried SWT. "
+				+ "And well... I failed... But the bundle's still there !");
+	}
 }

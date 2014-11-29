@@ -1,18 +1,16 @@
-package org.ups.weather.openstreetweather.service;
+package org.ups.weather.randomweather.service;
 
 import java.util.Observer;
 
 import org.ups.weather.location.service.ILocation;
 
-public interface IWeatherOpenData {
+public interface IRandomWeather {
 	
 	public ILocation getLocation();
 	
 	public void setLocation(ILocation location);
 
-	public String getWeather();
+	public WeatherType getWeather();
 	
 	public void addObserver(Observer observer);
-
-	
 }

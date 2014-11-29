@@ -2,6 +2,9 @@ package org.ups.weather.randomweather;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;
+import org.osgi.util.tracker.ServiceTracker;
+import org.osgi.util.tracker.ServiceTrackerCustomizer;
+import org.ups.weather.location.service.ILocation;
 
 public class Activator implements BundleActivator {
 
@@ -17,6 +20,12 @@ public class Activator implements BundleActivator {
 	 */
 	public void start(BundleContext bundleContext) throws Exception {
 		Activator.context = bundleContext;
+		
+		ServiceTrackerCustomizer<ILocation, ILocation> locationTrackerCustomizer =
+				new LocationTrackerCustomizer(bundleContext);
+		ServiceTracker<ILocation, ILocation> locationServiceTracker =
+				new ServiceTracker<>(bundleContext, ILocation.class.getName(), locationTrackerCustomizer);
+		locationServiceTracker.open();
 	}
 
 	/*

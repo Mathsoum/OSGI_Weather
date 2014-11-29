@@ -7,21 +7,21 @@ import org.osgi.framework.ServiceReference;
 import org.osgi.util.tracker.ServiceTrackerCustomizer;
 import org.ups.weather.application.service.IWeatherService;
 import org.ups.weather.application.service.impl.WeatherListener;
-import org.ups.weather.randomweather.service.ILocalWeather;
+import org.ups.weather.randomweather.service.IRandomWeather;
 
-public class LocalWeatherServiceCustomizer implements ServiceTrackerCustomizer<ILocalWeather, ILocalWeather> {
+public class RandomWeatherServiceCustomizer implements ServiceTrackerCustomizer<IRandomWeather, IRandomWeather> {
 	
 	private BundleContext bundleContext;
 	private IWeatherService weatherService;
 	
-	public LocalWeatherServiceCustomizer(BundleContext _bundleContext, ServiceReference<IWeatherService> _weatherServiceReference) {
+	public RandomWeatherServiceCustomizer(BundleContext _bundleContext, ServiceReference<IWeatherService> _weatherServiceReference) {
 		bundleContext = _bundleContext;
 		weatherService = (IWeatherService) bundleContext.getService(_weatherServiceReference);
 	}
 
 	@Override
-	public ILocalWeather addingService(ServiceReference<ILocalWeather> reference) {
-		ILocalWeather localWeather = (ILocalWeather) bundleContext.getService(reference);
+	public IRandomWeather addingService(ServiceReference<IRandomWeather> reference) {
+		IRandomWeather localWeather = (IRandomWeather) bundleContext.getService(reference);
 		WeatherListener weatherListener = new WeatherListener();
 		localWeather.addObserver((Observer) weatherListener); //TODO Unregister this when stopping bundle... At least understand why this continue to run after shutting it off...
 		weatherListener.addObserver((Observer) weatherService);
@@ -31,15 +31,15 @@ public class LocalWeatherServiceCustomizer implements ServiceTrackerCustomizer<I
 	}
 
 	@Override
-	public void modifiedService(ServiceReference<ILocalWeather> reference,
-			ILocalWeather service) {
+	public void modifiedService(ServiceReference<IRandomWeather> reference,
+			IRandomWeather service) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void removedService(ServiceReference<ILocalWeather> reference,
-			ILocalWeather service) {
+	public void removedService(ServiceReference<IRandomWeather> reference,
+			IRandomWeather service) {
 		// TODO Auto-generated method stub
 	}
 }
