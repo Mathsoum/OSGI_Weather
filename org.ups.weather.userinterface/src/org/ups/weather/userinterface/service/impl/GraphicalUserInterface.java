@@ -10,7 +10,6 @@ import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
-import org.ups.weather.location.service.ILocation;
 import org.ups.weather.userinterface.service.IGraphicalUserInterface;
 
 public class GraphicalUserInterface extends UserInterface implements IGraphicalUserInterface {
@@ -51,7 +50,7 @@ public class GraphicalUserInterface extends UserInterface implements IGraphicalU
 	}
 
 	private void updateView() {
-		for(ILocation location : weatherStatus.keySet()) {
+		for(String location : weatherStatus.keySet()) {
 			boolean exists = false;
 			Label locationLabel = null;
 			for(Label label : ui_weatherStatus.keySet()) {
@@ -74,7 +73,7 @@ public class GraphicalUserInterface extends UserInterface implements IGraphicalU
 			
 			if(!weatherStatus.get(location).toString().equals(ui_weatherStatus.get(locationLabel).getText())) {
 				locationLabel.setText(location.toString());
-				ui_weatherStatus.get(locationLabel).setText(weatherStatus.get(location).name());
+				ui_weatherStatus.get(locationLabel).setText(weatherStatus.get(location));
 			}
 		}
 		

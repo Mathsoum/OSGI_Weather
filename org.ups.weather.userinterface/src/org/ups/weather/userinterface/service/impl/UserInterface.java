@@ -4,14 +4,12 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Observable;
 
-import org.ups.weather.location.service.ILocation;
-import org.ups.weather.location.service.WeatherType;
 import org.ups.weather.userinterface.service.IUserInterface;
 
 //TODO What is this take a String instead of some WeatheType. Could be more generic that way.
 public class UserInterface implements IUserInterface {
 	
-	protected Map<ILocation, WeatherType> weatherStatus;
+	protected Map<String, String> weatherStatus;
 	
 	public UserInterface() {
 		weatherStatus = new HashMap<>();
@@ -21,14 +19,14 @@ public class UserInterface implements IUserInterface {
 	}
 
 	@Override
-	public void setWeatherStatus(Map<ILocation, WeatherType> _weatherStatus) {
+	public void setWeatherStatus(Map<String, String> _weatherStatus) {
 		weatherStatus = _weatherStatus;
 		print();
 	}
 	
 	protected void print() {
-		for(ILocation location : weatherStatus.keySet()) {
-			System.out.print("(" + location.getLatitude() + " - " + location.getLongitude() + ")");
+		for(String location : weatherStatus.keySet()) {
+			System.out.print(location);
 			System.out.println(" : the weather is " + weatherStatus.get(location));
 		}
 	}
@@ -37,7 +35,7 @@ public class UserInterface implements IUserInterface {
 	public void update(Observable observable, Object paramFromObservable) {
 		if(paramFromObservable instanceof Map<?, ?>) {
 			@SuppressWarnings("unchecked")
-			Map<ILocation, WeatherType> weatherStatus = (Map<ILocation, WeatherType>) paramFromObservable;
+			Map<String, String> weatherStatus = (Map<String, String>) paramFromObservable;
 			setWeatherStatus(weatherStatus);
 		}
 	}
